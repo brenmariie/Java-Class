@@ -1,0 +1,117 @@
+package scr.pkg.edu.gatewaycc.brenda.wk1;
+
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class JShapePanel  extends JPanel implements ActionListener {
+	
+	JButton button = new JButton("Press me");
+	Color color = Color.RED;
+	String shape = "cirlce";
+	int x = 0;
+	int y = 0;
+	int count = 0;
+	final int SIZE = 40;
+	final int INCREASE = 15;
+	final int TIMES = 14;
+	
+	public JShapePanel()
+	{
+		setBackground(Color.WHITE);
+		add(button);
+		button.addActionListener(this);
+	}
+	public void actionPerformed(ActionEvent e)
+	{
+		++count;
+		if(count == TIMES)
+		{
+			x = 0;
+			y = 0;
+			count = 0;
+		}
+		
+		if(shape.equals("cirlce"))
+		{
+			color = Color.BLUE;
+			shape = "rect";
+		}
+		else 
+		{
+			shape = "cirlce";
+			color = Color.RED;
+		}
+		
+		 x += INCREASE;
+		 y += INCREASE;
+		 repaint();
+	}
+	
+	@Override
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		g.setColor(color);
+		if(shape.equals("cirlce"))
+			g.fillOval(x, y, SIZE, SIZE);
+		else
+			g.fillRect(x, y, SIZE, SIZE);
+		
+		}
+	public static void main(String[] args){
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(new JShapePanel());
+		frame.setSize(300,300);
+		frame.setVisible(true);
+		
+	}
+  
+}
+
+--------------------------------------------------------------------------------------------------------------------
+package scr.pkg.edu.gatewaycc.brenda.wk1;
+
+import java.awt.Graphics;
+import java.awt.Polygon;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class JCopyShape  extends JPanel{
+	
+
+   int xPoints[] = {42, 52, 72, 52, 60, 40, 15, 28, 9, 32, 42};
+   int yPoints[] = {38, 62, 68, 80, 105, 85, 102, 75, 58, 60,38};
+   Polygon aStar = new Polygon(xPoints, yPoints, xPoints.length);
+   
+   @Override
+   public void paintComponent(Graphics g)
+   {
+	   super.paintComponent(g);
+	   g.drawPolygon(aStar);
+	   g.copyArea(0, 0,  75, 105, 80, 40 );
+	   g.copyArea(0, 0, 75, 105, 40, 150);
+	   g.copyArea(0, 0, 75, 105, 170, 0);
+	   g.copyArea(0, 0, 75, 105, 150, 110);
+   }
+   
+   public static void main(String[] args)
+   {
+	   JFrame frame = new JFrame();
+	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   frame.add(new JCopyShape());
+	   frame.setSize(300, 300);
+	   frame.setVisible(true);
+	   
+   }
+	   
+ }
