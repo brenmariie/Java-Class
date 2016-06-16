@@ -1,0 +1,108 @@
+package pkg.edu.gatewaycc.brenda.wk1;
+
+import java.io.*;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+class FileWrite {
+	
+	public static void frame (){
+		 JFrame file = new JFrame("Brenda's Address Book");
+
+	       
+		  
+	       JPanel panel = new JPanel();
+	       file.add(panel);
+	       JLabel companyName = new JLabel("Company Name");
+	       JLabel address = new JLabel("Address");
+	       JLabel city = new JLabel("City");
+	       JLabel state = new JLabel("State");
+	       JLabel zipCode = new JLabel("Zip Code");
+
+	       JTextField cn = new JTextField(20);
+	       
+	       JButton write = new JButton("Write");
+	       JButton read =new JButton("Read");
+	  
+	 
+	       ButtonGroup location = new ButtonGroup();
+	       
+	       location.add(write);
+	       location.add(read);
+	       panel.add(write);
+	       panel.add(read);
+	       
+	       panel.add(companyName);
+	       panel.add(cn);
+	       panel.add(address);
+	       panel.add(city);
+	       panel.add(state);
+	       panel.add(zipCode);
+	      
+	      
+	    
+	       
+	       
+	    
+	       //panel.add(finaltotal);
+	       file.setVisible(true);
+	       file.setSize(400, 400);
+	       file.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	      
+	     
+	       
+	     
+	       write.addActionListener(null);
+	       read.addActionListener(null);
+	       
+	   }
+	
+	
+	public static void main(String args[]) {
+		
+
+		
+		try {
+			
+			// Create file
+			FileWriter fstream = new FileWriter("C:\\users\\bre2162238\\out.txt");
+			BufferedWriter out = new BufferedWriter(fstream);
+			frame();
+			out.write("Hello from gateway by brenda");
+			
+			// Close the output stream
+			out.close();
+		} catch (Exception e) {// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+		}
+	
+
+	
+ try{
+// Open the file that is the first 
+// command line parameter
+FileInputStream fstream = new FileInputStream("C:\\users\\bre2162238\\out.txt");
+// Get the object of DataInputStream
+DataInputStream in = new DataInputStream(fstream);
+BufferedReader br = new BufferedReader(new InputStreamReader(in));
+String strLine;{
+//Read File Line By Line
+while ((strLine = br.readLine()) != null)   {
+// Print the content on the console
+System.out.println (strLine);
+}
+//Close the input stream
+in.close();
+}}catch (Exception e){//Catch exception if any
+System.err.println("Error: " + e.getMessage());
+}
+
+ }
+}
