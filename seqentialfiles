@@ -1,0 +1,154 @@
+package week3;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+
+import javax.swing.*;
+
+
+public class SequentialFiles {
+
+
+	JTextArea TA = new JTextArea(15, 30);
+	JLabel lb1 = new JLabel();
+	JLabel lb2 = new JLabel();
+	JLabel lb3 = new JLabel();
+	JLabel lb4 = new JLabel();
+	JLabel lb5 = new JLabel();
+	static JTextField t1 = new JTextField(20);
+	static JTextField t2 = new JTextField(20);
+	static JTextField t3 = new JTextField(20);
+	static JTextField t4 = new JTextField(20);
+	static JTextField t5 = new JTextField(20);
+	JButton btn = new JButton("Save");
+	JButton btn2 = new JButton("File");
+	static String g = t1.getText();
+	static String h = t2.getText();
+	static String i = t3.getText();
+	static String j = t4.getText();
+	static String k = t5.getText();
+
+	public static void main(String[] args) {
+		SequentialFiles b = new SequentialFiles();
+
+		
+		
+	}
+
+
+
+	public SequentialFiles() {
+
+		JFrame frame = new JFrame(" Address Book ");
+		JPanel panel = new JPanel();
+		lb1.setText("         Company Name");
+		lb2.setText("    Company Address");
+		lb3.setText("                                   City");
+		lb4.setText("                                State");
+		lb5.setText("                         Zip Code");
+
+		frame.add(panel);
+
+		panel.add(lb1);
+		panel.add(t1);
+		panel.add(lb2);
+		panel.add(t2);
+		panel.add(lb3);
+		panel.add(t3);
+		panel.add(lb4);
+		panel.add(t4);
+		panel.add(lb5);
+		panel.add(t5);
+		panel.add(btn);
+		panel.add(TA);
+		panel.add(btn2);
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(400, 460);
+		frame.setVisible(true);
+
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent o) {
+				t1.getText();
+				t2.getText();
+				t3.getText();
+				t4.getText();
+				t5.getText();
+				String g = t1.getText();
+				String h = t2.getText();
+				String i = t3.getText();
+				String j = t4.getText();
+				String k = t5.getText();
+
+				try {
+					// Create file
+					FileWriter fstream = new FileWriter(
+							"C:\\Users\\BRE2162238\\out.txt");
+					BufferedWriter out = new BufferedWriter(fstream);
+					out.write(g);
+					out.write(" ");
+					out.write(h);
+					out.write(" ");
+					out.write(i);
+					out.write(" ");
+					out.write(j);
+					out.write(" ");
+					out.write(k);
+					
+
+					// Close the output stream
+					out.close();
+				} catch (Exception e) {// Catch exception if any
+					System.err.println("Error: " + e.getMessage());
+				}
+
+				
+				t1.setText(" ");
+				t2.setText(" ");
+				t3.setText(" ");
+				t4.setText(" ");
+				t5.setText(" ");
+			}
+
+		});
+
+		btn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent q) {
+				try {
+					// Open the file that is the first
+					// command line parameter
+					FileInputStream fstream = new FileInputStream(
+							"C:\\Users\\BRE2162238\\out.txt");
+					// Get the object of DataInputStream
+					DataInputStream in = new DataInputStream(fstream);
+					BufferedReader br = new BufferedReader(
+							new InputStreamReader(in));
+					String strLine ;
+					// Read File Line By Line
+					while ((strLine = br.readLine()) != null) {
+						// Print the content on the console
+						TA.setText(strLine);
+						
+					}
+					// Close the input stream
+					in.close();
+				} catch (Exception o) {// Catch exception if any
+					System.err.println("Error: " + o.getMessage());
+				}
+
+			}
+
+		});
+
+	}
+}
+
